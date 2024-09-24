@@ -122,7 +122,7 @@ class SimpleHeuristic(Heuristic):
         return 'Simple'
     
     @staticmethod
-    @jit(float32(int32, int32[:, :], int32), nopython=True, cache=True)
+    @jit(nopython=True, cache=True)
     def _evaluate(player_id: int, state: np.ndarray, winner: int) -> float:
         """Determine utility of a board state
 

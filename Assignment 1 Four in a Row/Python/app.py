@@ -46,7 +46,7 @@ def start_game(game_n: int, board: Board, players: List[PlayerController]) -> in
     return winner
 
 
-@jit(int32(int32[:, :], int32), nopython=True, cache=True)
+@jit(nopython=True, cache=True)
 def winning(state: np.ndarray, game_n: int) -> int:
     """Determines whether a player has won, and if so, which one
 
@@ -75,7 +75,7 @@ def winning(state: np.ndarray, game_n: int) -> int:
                 counter = 1 
                 player = field
             
-    # Horizintal check
+    # Horizontal check
     for row in state.T:
         counter = 0
         player = -1
