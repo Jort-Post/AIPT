@@ -98,12 +98,24 @@ class MinMaxPlayer(PlayerController):
 
         # This is obviously not enough (this is depth 1)
         # Your assignment is to create a data structure (tree) to store the gameboards such that you can evaluate a higher depths.
-        def init_node(state: np.ndarray):
-            return {'parent': state,
-                    'Player': 'X' if self.player_id == 1 else 'O',
-                    'children': {}}
+        def init_node(board: Board,player_id: int) -> dict:
+            return {'state': board.get_board_state(),
+                    'Player': 'X' if player_id == 1 else 'O',
+                    'children': []}
 
-        def add_node(node: dict):
+        def add_node(node: dict, board: Board) -> dict:
+            for col in range(board.width):
+                if board.is_valid(col):
+                    child_id = 0 if node['Player'] == 'X' else 1
+                    child_board: Board = board.get_new_board(col, child_id)
+                    node['children'].append(init_node(child_board,child_id))
+            return node
+
+        def tree(board: Board,):
+
+            for i in range(self.depth):
+
+
 
 
         # Then, use the minmax algorithm to search through this tree to find the best move/action to take!
