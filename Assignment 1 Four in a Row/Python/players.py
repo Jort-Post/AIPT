@@ -104,7 +104,7 @@ class MinMaxPlayer(PlayerController):
                     'children': {}}
 
         def add_node(node: dict):
-            
+
 
         # Then, use the minmax algorithm to search through this tree to find the best move/action to take!
 
