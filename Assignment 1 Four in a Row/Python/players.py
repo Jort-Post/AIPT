@@ -103,18 +103,19 @@ class MinMaxPlayer(PlayerController):
                     'Player': 'X' if player_id == 1 else 'O',
                     'children': []}
 
-        def add_node(node: dict, board: Board) -> dict:
+        def build_tree(board: Board, max_depth: int = self.depth, current_depth: int = 0, player_id: int = self.player_id):
+            node = init_node(board, player_id)
+
+            if current_depth >= max_depth:
+                return node
+
             for col in range(board.width):
                 if board.is_valid(col):
                     child_id = 0 if node['Player'] == 'X' else 1
                     child_board: Board = board.get_new_board(col, child_id)
-                    node['children'].append(init_node(child_board,child_id))
+                    child_node = build_tree(child_board, max_depth, current_depth + 1, child_id)
+                    node['children'].append(child_node)
             return node
-
-        def tree(board: Board,):
-
-            for i in range(self.depth):
-
 
 
 
