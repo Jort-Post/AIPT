@@ -111,11 +111,24 @@ class MinMaxPlayer(PlayerController):
 
             for col in range(board.width):
                 if board.is_valid(col):
-                    child_id = 0 if node['Player'] == 'X' else 1
+                    child_id = 1 if node['Player'] == 'X' else 2
                     child_board: Board = board.get_new_board(col, child_id)
                     child_node = build_tree(child_board, max_depth, current_depth + 1, child_id)
                     node['children'].append(child_node)
             return node
+
+        def MinMax(tree: dict, depth: int, player_id: int = self.player_id):
+
+            position = tree['state']
+
+            if depth == 0 or Heuristic.winning(position,self.game_n) != 0:
+                return self.heuristic.evaluate_board(player_id, position)
+
+            elif player_id == 1:
+                MaxEval = -float('infinity')
+                for child in tree['children']:
+                    eval = MinMax(child, depth - 1, child['Player'])
+
 
 
 
