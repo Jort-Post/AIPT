@@ -100,8 +100,9 @@ class MinMaxPlayer(PlayerController):
         # Your assignment is to create a data structure (tree) to store the gameboards such that you can evaluate a higher depths.
         def init_node(board: Board,player_id: int) -> dict:
             return {'state': board.get_board_state(),
-                    'Player': player_id if player_id == 1 else 2,
-                    'children': []}
+                    'playerID': player_id if player_id == 1 else 2,
+                    'children': [],
+                    'move': None}
 
         def build_tree(board: Board, max_depth: int = self.depth, current_depth: int = 0, player_id: int = self.player_id):
             node = init_node(board, player_id)
@@ -111,13 +112,14 @@ class MinMaxPlayer(PlayerController):
 
             for col in range(board.width):
                 if board.is_valid(col):
-                    child_id = 3 - node['Player']
+                    child_id = 3 - node['playerID']
                     child_board: Board = board.get_new_board(col, child_id)
                     child_node = build_tree(child_board, max_depth, current_depth + 1, child_id)
                     node['children'].append(child_node)
+                    # Find a way to retrieve the move OR column it takes for the parent to go to the child
             return node
 
-        def minimax(tree: dict, player_id: int, depth: int = self.depth):
+        def minimax(tree: dict, player_id: int = self.player_id, depth: int = self.depth):
 
             position = tree['state']
 
@@ -126,21 +128,27 @@ class MinMaxPlayer(PlayerController):
             # Remember to indicate in the report that you have changed the code in heuristics.py
 
             elif player_id == 1:
-                max_move = -float('infinity')
-                for child in range(len(tree['children'])):
-                    eval = minimax(tree['children'][child], tree['children'][child]['Player'], depth - 1)
-                    max_move = eval if eval >= max_move else max_move
-                return max_move
+
+                max_val = -np.inf
+                max_move = None
+                for child in tree['children']:
+                    eval = minimax(child, child['playerID'], depth - 1)
+                    if eval >= max_val:
+                        max_val = eval
+                        max_move = child['move']
+                return max_val if depth < self.depth else max_move
 
             else:
-                min_move = float('infinity')
-                for child in range(len(tree['children'])):
-                    eval = minimax(tree['children'][child], tree['children'][child]['Player'], depth - 1)
-                    min_move = eval if eval < min_move else min_move
-                return min_move
+                min_val = np.inf
+                max_move = None
+                for child in tree['children']:
+                    eval = minimax(child, child['playerID'], depth - 1)
+                    if eval < min_val:
+                        min_val = eval
+                        max_move = child['move']
+                return min_val if depth < self.depth else max_move
 
         # Then, use the minmax algorithm to search through this tree to find the best move/action to take!
-        wiuefuhwufiuw
 
         # Today you will:
         # - experiment to ensure your implementation is working correctly
@@ -183,6 +191,10 @@ class AlphaBetaPlayer(PlayerController):
         # TODO: implement minmax algorithm with alpha beta pruning!
         return 0
 
+class MonteCarloPlayer(PlayerController):
+    def __init__(self, player_id: int, game_n: int, depth: int, heuristic: Heuristic) -> None:
+        super().__init__(player_id,game_n,heuristic)
+        self.depth: int = depth
 
 class HumanPlayer(PlayerController):
     """Class for the human player
