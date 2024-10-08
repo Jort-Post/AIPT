@@ -138,11 +138,11 @@ class SimpleHeuristic(Heuristic):
         width, height = state.shape
 
         if winner == player_id: # player won
-            return np.inf
+            return max(width, height)
         elif winner < 0: # draw
             return 0.
         elif winner > 0: # player lost
-            return np.NINF
+            return -max(width, height)
         
         # not winning or losing, return highest number of claimed squares in a row      
         max_in_row: int = 0
@@ -178,3 +178,19 @@ class SimpleHeuristic(Heuristic):
                         break
 
         return float(max_in_row)
+
+class AdvancedHeuristic(Heuristic):
+    def __init__(self,game_n: int) -> None:
+        """
+            Args:
+                game_n (int): n in a row required to win
+        """
+        super().__init__(game_n)
+
+    def _name(self) -> str:
+        """
+        Returns:
+            str: the name of the heuristic; Advanced
+        """
+        return 'Advanced'
+
