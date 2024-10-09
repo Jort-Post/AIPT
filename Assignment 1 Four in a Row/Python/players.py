@@ -20,6 +20,7 @@ class PlayerController:
         self.player_id = player_id
         self.game_n = game_n
         self.heuristic = heuristic
+        self.visited_nodes: int = 0  # runtime measure
 
     def get_eval_count(self) -> int:
         """
@@ -27,6 +28,13 @@ class PlayerController:
             int: The amount of times the heuristic was used to evaluate a board state
         """
         return self.heuristic.eval_count
+
+    def get_visited_nodes(self) -> int:
+        """
+        Returns:
+
+        """
+        return self.visited_nodes
 
     def __str__(self) -> str:
         """
@@ -96,7 +104,7 @@ class MinMaxPlayer(PlayerController):
         node = MinMaxPlayer.init_node(board, player_id)
 
         #
-        if current_depth >= max_depth:
+        if current_depth == max_depth:
             return node
 
         #
@@ -124,7 +132,7 @@ class MinMaxPlayer(PlayerController):
         self.visited_nodes += 1 # used to measure the runtime
 
         #
-        if depth == 0 or Heuristic.winning(position, self.game_n) != 0:
+        if depth == 0 or self.heuristic.winning(position, self.game_n) != 0:
             return self.heuristic.evaluate_board(player_id, position)
 
         elif player_id == 1:
@@ -141,12 +149,12 @@ class MinMaxPlayer(PlayerController):
                     max_val = eval
                     max_move = child['parent_move']
 
-            return max_val if depth < self.depth else max_move
+            return max_move if depth == self.depth else max_val
 
-        else:
+        elif player_id == 2:
             #
             min_val = np.inf
-            max_move = None
+            min_move = None
 
             #
             for child in tree['children']:
@@ -155,9 +163,9 @@ class MinMaxPlayer(PlayerController):
                 #
                 if eval < min_val:
                     min_val = eval
-                    max_move = child['parent_move']
+                    min_move = child['parent_move']
 
-            return min_val if depth < self.depth else max_move
+            return min_move if depth == self.depth else min_val
 
     def make_move(self, board: Board) -> int:
         """Gets the column for the player to play in
@@ -168,12 +176,16 @@ class MinMaxPlayer(PlayerController):
         Returns:
             int: column to play in
         """
+        print(f"Player {self.player_id} is making a move")
+        print(f"Current board state:\n{board}")
+
         tree = self.build_tree(board, self.player_id, self.depth, 0)
         best_move = self.minimax(tree, self.player_id, self.depth)
-        return best_move
 
-    def get_runtime_measure(self) -> int:
-        return self.visited_nodes
+        print(f"Chose move: {best_move}")
+        print(f"Evaluated {self.visited_nodes} nodes")
+
+        return best_move
 
 
 class AlphaBetaPlayer(PlayerController):
@@ -222,7 +234,7 @@ class AlphaBetaPlayer(PlayerController):
         node = AlphaBetaPlayer.init_node(board, player_id)
 
         #
-        if current_depth >= max_depth:
+        if current_depth == max_depth:
             return node
 
         for col in range(board.width):
@@ -252,7 +264,7 @@ class AlphaBetaPlayer(PlayerController):
         self.visited_nodes += 1
 
         #
-        if depth == 0 or Heuristic.winning(position, self.game_n) != 0:
+        if depth == 0 or self.heuristic.winning(position, self.game_n) != 0:
             return self.heuristic.evaluate_board(player_id, position)
 
         elif player_id == 1:
@@ -271,15 +283,15 @@ class AlphaBetaPlayer(PlayerController):
 
                 #
                 alpha = alpha if alpha > eval else eval
-                if beta <= alpha:
+                if alpha >= beta:
                     break
 
-            return max_val if depth < self.depth else max_move
+            return max_move if depth == self.depth else max_val
 
-        else:
+        elif player_id == 2:
             #
             min_val = np.inf
-            max_move = None
+            min_move = None
 
             #
             for child in tree['children']:
@@ -288,14 +300,14 @@ class AlphaBetaPlayer(PlayerController):
                 #
                 if eval < min_val:
                     min_val = eval
-                    max_move = child['parent_move']
+                    min_move = child['parent_move']
 
                 #
-                beta = min(beta, eval)
-                if beta <= alpha:
+                beta = beta if beta < eval else eval
+                if alpha >= beta:
                     break
 
-            return min_val if depth < self.depth else max_move
+            return min_move if depth == self.depth else min_val
 
 
     def make_move(self, board: Board) -> int:
@@ -307,18 +319,18 @@ class AlphaBetaPlayer(PlayerController):
         Returns:
             int: column to play in
         """
-
-        # TODO: implement minmax algorithm with alpha beta pruning!
-        # - Implement alpha-beta pruning, using a runtime measure to compare the complexity
-        # between the agent with and without alpha-beta pruning for various N, board sizes and
-        # search depths.
+        print(f"Player {self.player_id} is making a move")
+        print(f"Current board state:\n{board}")
 
         tree = self.build_tree(board, self.player_id, self.depth, 0)
         best_move = self.alpha_beta(tree, self.player_id, self.depth)
+
+        print(f"Chose move: {best_move}")
+        print(f"Evaluated {self.visited_nodes} nodes")
+
         return best_move
 
-    def get_runtime_measure(self) -> int:
-        return self.visited_nodes
+
 class MonteCarloPlayer(PlayerController):
     def __init__(self, player_id: int, game_n: int, depth: int, heuristic: Heuristic) -> None:
         super().__init__(player_id,game_n,heuristic)

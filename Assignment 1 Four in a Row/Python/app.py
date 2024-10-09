@@ -1,9 +1,9 @@
 from heuristics import Heuristic, SimpleHeuristic
-from players import PlayerController, HumanPlayer, MinMaxPlayer, AlphaBetaPlayer
+from players import PlayerController, HumanPlayer, MinMaxPlayer, AlphaBetaPlayer, MonteCarloPlayer
 from board import Board
 from typing import List
 import numpy as np
-from numba import jit
+from numba import jit, float32, int32
 
 
 def start_game(game_n: int, board: Board, players: List[PlayerController]) -> int:
@@ -42,6 +42,7 @@ def start_game(game_n: int, board: Board, players: List[PlayerController]) -> in
 
     for p in players:
         print(f'Player {p} evaluated a boardstate {p.get_eval_count()} times!')
+        print(f'Player {p} visited a total of {p.get_visited_nodes()} nodes!')
 
     return winner
 
@@ -142,12 +143,13 @@ def get_players(game_n: int) -> List[PlayerController]:
     human1: PlayerController = HumanPlayer(1, game_n, heuristic1)
     human2: PlayerController = HumanPlayer(2, game_n, heuristic2)
 
-    bot1: PlayerController = MinMaxPlayer(1, game_n, 10, heuristic1)
-    bot2: PlayerController = AlphaBetaPlayer(2, game_n, 10, heuristic2)
+    bot1: PlayerController = MinMaxPlayer(1, game_n, 7, heuristic1)
+    bot2: PlayerController = AlphaBetaPlayer(1, game_n, 5, heuristic1)
+    bot3: PlayerController = MinMaxPlayer(2, game_n, 5, heuristic2)
 
     # TODO: Implement other PlayerControllers (MinMaxPlayer and AlphaBetaPlayer)
 
-    players: List[PlayerController] = [human1, bot1]
+    players: List[PlayerController] = [bot2, bot3]
 
     assert players[0].player_id in {1, 2}, 'The player_id of the first player must be either 1 or 2'
     assert players[1].player_id in {1, 2}, 'The player_id of the second player must be either 1 or 2'

@@ -29,7 +29,7 @@ class Heuristic:
         Returns:
             int: column with the best heuristic value
         """
-        utils: np.ndarray = np.full(board.width, np.NINF, dtype=float)
+        utils: np.ndarray = np.full(board.width, -np.inf, dtype=float)
 
         for i in range(board.width):
             if board.is_valid(i):
@@ -50,7 +50,7 @@ class Heuristic:
             float: the utility of a board
         """
         self.eval_count += 1
-        return self._evaluate(player_id, position, self.winning(position, self.game_n))
+        return self._evaluate(player_id, np.array(position), self.winning(np.array(position), self.game_n))
     
 
     @staticmethod
@@ -65,7 +65,7 @@ class Heuristic:
             int: 1 or 2 if the respective player won, -1 if the game is a draw, 0 otherwise
         """
         from app import winning as app_winning # imported here to avoid circular imports
-        return app_winning(state, game_n)
+        return app_winning(np.array(state), game_n)
     
 
     def __str__(self) -> str:
