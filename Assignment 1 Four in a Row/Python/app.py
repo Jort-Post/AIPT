@@ -143,13 +143,13 @@ def get_players(game_n: int) -> List[PlayerController]:
     human1: PlayerController = HumanPlayer(1, game_n, heuristic1)
     human2: PlayerController = HumanPlayer(2, game_n, heuristic2)
 
-    bot1: PlayerController = MinMaxPlayer(1, game_n, 7, heuristic1)
-    bot2: PlayerController = AlphaBetaPlayer(1, game_n, 5, heuristic1)
-    bot3: PlayerController = MinMaxPlayer(2, game_n, 5, heuristic2)
+    bot1: PlayerController = MinMaxPlayer(1, game_n, 8, heuristic1)
+    bot2: PlayerController = AlphaBetaPlayer(1, game_n, 8, heuristic1)
+    bot3: PlayerController = MinMaxPlayer(2, game_n, 8, heuristic2)
 
     # TODO: Implement other PlayerControllers (MinMaxPlayer and AlphaBetaPlayer)
 
-    players: List[PlayerController] = [bot2, bot3]
+    players: List[PlayerController] = [bot2, human2]
 
     assert players[0].player_id in {1, 2}, 'The player_id of the first player must be either 1 or 2'
     assert players[1].player_id in {1, 2}, 'The player_id of the second player must be either 1 or 2'

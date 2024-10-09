@@ -39,7 +39,7 @@ class Heuristic:
         return np.argmax(utils)
     
 
-    def evaluate_board(self, player_id: int, position: np.ndarray) -> float:
+    def evaluate_board(self, player_id: int, board: Board) -> float:
         """Helper function to assign a utility to a board
 
         Args:
@@ -50,7 +50,8 @@ class Heuristic:
             float: the utility of a board
         """
         self.eval_count += 1
-        return self._evaluate(player_id, np.array(position), self.winning(np.array(position), self.game_n))
+        state: np.ndarray = board.get_board_state()
+        return self._evaluate(player_id, state, self.winning(state, self.game_n))
     
 
     @staticmethod
