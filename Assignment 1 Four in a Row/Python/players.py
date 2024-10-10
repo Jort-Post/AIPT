@@ -2,6 +2,7 @@ from __future__ import annotations
 from abc import abstractmethod
 import numpy as np
 from typing import TYPE_CHECKING
+import random
 if TYPE_CHECKING:
     from heuristics import Heuristic
     from board import Board
@@ -87,7 +88,7 @@ class MinMaxPlayer(PlayerController):
         """
         self.visited_nodes += 1
 
-        if depth == 0 or self.heuristic.winning(board.get_board_state(), self.game_n) != 0:
+        if depth == 0 or self.heuristic.winning(board.get_board_state(), self.game_n) > 0:
             return self.heuristic.evaluate_board(3-player_id, board)
 
         elif player_id == 1:
@@ -171,7 +172,7 @@ class AlphaBetaPlayer(PlayerController):
                 """
         self.visited_nodes += 1
 
-        if depth == 0 or self.heuristic.winning(board.get_board_state(), self.game_n) != 0:
+        if depth == 0 or self.heuristic.winning(board.get_board_state(), self.game_n) > 0:
             return self.heuristic.evaluate_board(3 - player_id, board)
 
         elif player_id == 1:
@@ -239,9 +240,41 @@ class MonteCarloPlayer(PlayerController):
         super().__init__(player_id,game_n,heuristic)
         self.depth: int = depth
 
-    # - Bonus points are offered if you experiment with at least one different heuristic(s) (1 bonus point
-    # extra; grade becomes 0.5 higher), exceptionally brave students may try implementing Monte Carlo
-    # Tree Search as a 3rd algorithm (1 bonus point extra; grade becomes 0.5 higher)
+    def get_all_moves(self, board: Board):
+        moves = []
+        for col in range(board.width):
+            if board.is_valid(col):
+                moves.append(col)
+        return moves
+
+    def simulate(self, board: Board, player_id: int):
+        while True:
+            winner = self.heuristic.winning(board.get_board_state(), self.game_n)
+            if winner > 0 or winner == -1:
+                return winner
+
+            valid_moves = self.get_all_moves(board)
+            move = random.choice(valid_moves)
+            board.play(move, player_id)
+            player_id = 3 - player_id
+
+    def backpropagate(self, result: int):
+
+    def expand(self, board: Board, player_id: int):
+
+    @staticmethod
+    def uct():
+
+    def select(self, ):
+
+    def mcts(self, board: Board, player_id: int, iterations=1000):
+
+        for _ in range(iterations):
+
+
+
+
+
 
 class HumanPlayer(PlayerController):
     """Class for the human player

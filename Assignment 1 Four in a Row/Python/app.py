@@ -25,9 +25,11 @@ def start_game(game_n: int, board: Board, players: List[PlayerController]) -> in
     while winner == 0:
         current_player: PlayerController = players[current_player_index]
         move: int = current_player.make_move(board)
+        move_count = 0
 
         while not board.play(move, current_player.player_id):
             move = current_player.make_move(board)
+            move_count += 1
 
         current_player_index = 1 - current_player_index
         winner = winning(board.get_board_state(), game_n)
@@ -43,6 +45,7 @@ def start_game(game_n: int, board: Board, players: List[PlayerController]) -> in
     for p in players:
         print(f'Player {p} evaluated a boardstate {p.get_eval_count()} times!')
         print(f'Player {p} visited a total of {p.get_visited_nodes()} nodes!')
+        print(f'Player {p} played {move_count} moves')
 
     return winner
 

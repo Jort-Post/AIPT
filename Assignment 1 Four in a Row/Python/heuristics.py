@@ -207,15 +207,13 @@ class CustomHeuristic(Heuristic):
             Returns:
                 float: heuristic value for the board state
         """
-        row: int
-        col: int
-        row, col = state.shape
+        rows: int
+        cols: int
+        rows, cols = state.shape
 
-        if winner == player_id: return max(row, col)
+        if winner == player_id: return max(rows, cols)
         elif winner < 0: return 0.
-        elif winner > 0: return -max(row, col)
-
-        value = state[row, col]
+        elif winner > 0: return -max(rows, cols)
 
         # Helper function to evaluate each sequence (a row, a column, a diagonal)
         def evaluate_sequence(sequence: np.array) -> float:
@@ -234,9 +232,10 @@ class CustomHeuristic(Heuristic):
             return 0
 
         # Check vertical win
-        for r in range(row):
-            for c in range(col):
-                evaluate_sequence(state[r, c])
+        for r in range(rows):
+            for c in range(4):
+                sequence = state[r, c:c+4]
+                score += evaluate_sequence(sequence)
 
         # Check Horizontal win
         # Check Positive Diagonal Win
