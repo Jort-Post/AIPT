@@ -144,12 +144,12 @@ def get_players(game_n: int) -> List[PlayerController]:
     human2: PlayerController = HumanPlayer(2, game_n, heuristic2)
 
     bot1: PlayerController = MinMaxPlayer(1, game_n, 8, heuristic1)
-    bot2: PlayerController = AlphaBetaPlayer(1, game_n, 8, heuristic1)
-    bot3: PlayerController = MinMaxPlayer(2, game_n, 8, heuristic2)
+    bot2: PlayerController = AlphaBetaPlayer(2, game_n, 8, heuristic2)
+
 
     # TODO: Implement other PlayerControllers (MinMaxPlayer and AlphaBetaPlayer)
 
-    players: List[PlayerController] = [bot2, human2]
+    players: List[PlayerController] = [bot1, bot2]
 
     assert players[0].player_id in {1, 2}, 'The player_id of the first player must be either 1 or 2'
     assert players[1].player_id in {1, 2}, 'The player_id of the second player must be either 1 or 2'
@@ -165,16 +165,14 @@ if __name__ == '__main__':
     width: int = 7  # width of the board
     height: int = 6 # height of the board
 
-    # During the experiments you only change one variable
-    # Baseline: game_n = 4, width = 7, height = 6, depth = 5
+    # During the experiments you only change ONE variable
+    # Test Baseline: game_n = 4, width = 7, height = 6, depth = 5
+    # Then adjust ONE of the following:
     # Experiment with: game_n = 3, 4 and 5
     # Experiment with: depth = 3,5,8 and 10 if possible
     # Experiment with board sizes: 6x7, 12x14 and 3x4
     # Experiment with a custom heuristic
-
-    # Measure runtime difference between minimax with and without alpha-beta pruning in all experiments
-    # Use .get_runtime_measure on a Player object after the game for the number of nodes visited
-    # Also use .get_eval_count for the amount of
+    # Switch player IDs
 
     # Check whether the game_n is possible
     assert 1 < game_n <= min(width, height), 'game_n is not possible'

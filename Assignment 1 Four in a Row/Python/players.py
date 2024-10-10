@@ -225,14 +225,10 @@ class MinMaxPlayer(PlayerController):
         print(f"Player {self.player_id} is making a move")
         print(f"Current board state:\n{board}")
 
-        #tree = self.build_tree(board, self.player_id, self.depth, 0)
-        #best_move = self.minimax(tree, self.player_id, self.depth)
-
         best_move = self.new_minimax(board, self.player_id, self.depth)
 
-        print(f'Best possible move: {self.heuristic.get_best_action(self.player_id, board)}')
-        print(f"Chose move: {best_move}")
-        print(f"Evaluated {self.visited_nodes} nodes")
+        print(f"Player {self.player_id} Chose move: {best_move}")
+        print(f"and evaluated {self.visited_nodes} nodes")
 
         return best_move
 
@@ -259,6 +255,8 @@ class AlphaBetaPlayer(PlayerController):
                     board (Board): the current board
                     player_id (int): id of a player, can take values 1 or 2 (0 = empty)
                     depth (int): the max search depth
+                    alpha (float):
+                    beta (float):
                 Returns:
                     int: the best column to play in
                 """
@@ -277,7 +275,7 @@ class AlphaBetaPlayer(PlayerController):
                     child_board: Board = board.get_new_board(col, child_id)
                     eval = self.new_alpha_beta(child_board, child_id, depth - 1, alpha, beta)
 
-                    if eval > max_val:
+                    if eval >= max_val:
                         max_val = eval
                         max_move = col
 
@@ -381,12 +379,10 @@ class AlphaBetaPlayer(PlayerController):
         print(f"Player {self.player_id} is making a move")
         print(f"Current board state:\n{board}")
 
-
         best_move = self.new_alpha_beta(board, self.player_id, self.depth)
 
-        print(f'Best possible move: {self.heuristic.get_best_action(self.player_id, board)}')
-        print(f"Chose move: {best_move}")
-        print(f"Evaluated {self.visited_nodes} nodes")
+        print(f"Player {self.player_id} Chose move: {best_move}")
+        print(f"and evaluated {self.visited_nodes} nodes")
 
         return best_move
 

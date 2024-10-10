@@ -180,7 +180,7 @@ class SimpleHeuristic(Heuristic):
 
         return float(max_in_row)
 
-class AdvancedHeuristic(Heuristic):
+class CustomHeuristic(Heuristic):
     def __init__(self,game_n: int) -> None:
         """
             Args:
@@ -193,5 +193,47 @@ class AdvancedHeuristic(Heuristic):
         Returns:
             str: the name of the heuristic; Advanced
         """
-        return 'Advanced'
+        return 'Custom'
 
+    @staticmethod
+    @jit(nopython=True, cache=True)
+    def _evaluate(player_id: int, state: np.ndarray, winner: int) -> float:
+        """
+        Determine utility of a board state
+            Args:
+                player_id (int): the player for which to compute the heuristic value
+                state (np.ndarray): the board to check
+                winner (int): 1 or 2 if the respective player won, -1 if the game is a draw, 0 otherwise
+            Returns:
+                float: heuristic value for the board state
+        """
+        row: int
+        col: int
+        row, col = state.shape
+
+        if winner == player_id: return max(width, height)
+        elif winner < 0: return 0.
+        elif winner > 0: return -max(width, height)
+
+        value = state[row, col]
+
+        # Helper function to evaluate each sequence (a row, a column, a diagonal)
+        def evaluate_sequence(sequence: np.array) -> float:
+            player_count = np.sum(sequence == player_id)
+            opponent_count = np.sum(sequence == 3 - player_id)
+            empty_count = np.sum(sequence == ' ')
+
+            if player_count == 4:
+                return 100
+            elif player_count == 3 & empty_count == 1:
+                return 5
+            elif player_count == 2 & empty_count == 2:
+                return 2
+            elif opponent_count == 3 & empty_count == 1:
+                return -4
+            return 0
+
+        # Check vertical win
+        # Check Horizontal win
+        # Check Positive Diagonal Win
+        # Check Negative Diagonal Win
