@@ -88,7 +88,7 @@ class MinMaxPlayer(PlayerController):
         self.visited_nodes += 1
 
         if depth == 0 or self.heuristic.winning(board.get_board_state(), self.game_n) != 0:
-            return self.heuristic.evaluate_board(player_id, board)
+            return self.heuristic.evaluate_board(3-player_id, board)
 
         elif player_id == 1:
             max_val = -np.inf
@@ -98,11 +98,12 @@ class MinMaxPlayer(PlayerController):
                 if board.is_valid(col):
                     child_id = 3 - player_id
                     child_board: Board = board.get_new_board(col, child_id)
-                    eval = self.new_minimax(child_board, child_id, depth - 1)
+                    evaluation = self.new_minimax(child_board, child_id, depth - 1)
 
-                    if eval >= max_val:
-                        max_val = eval
+                    if evaluation > max_val:
+                        max_val = evaluation
                         max_move = col
+
             return max_move if depth == self.depth else max_val
 
         else:
@@ -113,10 +114,10 @@ class MinMaxPlayer(PlayerController):
                 if board.is_valid(col):
                     child_id = 3 - player_id
                     child_board: Board = board.get_new_board(col, child_id)
-                    eval = self.new_minimax(child_board, child_id, depth - 1)
+                    evaluation = self.new_minimax(child_board, child_id, depth - 1)
 
-                    if eval < min_val:
-                        min_val = eval
+                    if evaluation < min_val:
+                        min_val = evaluation
                         min_move = col
 
             return min_move if depth == self.depth else min_val
@@ -171,7 +172,7 @@ class AlphaBetaPlayer(PlayerController):
         self.visited_nodes += 1
 
         if depth == 0 or self.heuristic.winning(board.get_board_state(), self.game_n) != 0:
-            return self.heuristic.evaluate_board(player_id, board)
+            return self.heuristic.evaluate_board(3 - player_id, board)
 
         elif player_id == 1:
             max_val = -np.inf
@@ -181,13 +182,13 @@ class AlphaBetaPlayer(PlayerController):
                 if board.is_valid(col):
                     child_id = 3 - player_id
                     child_board: Board = board.get_new_board(col, child_id)
-                    eval = self.new_alpha_beta(child_board, child_id, depth - 1, alpha, beta)
+                    evaluation = self.new_alpha_beta(child_board, child_id, depth - 1, alpha, beta)
 
-                    if eval >= max_val:
-                        max_val = eval
+                    if evaluation > max_val:
+                        max_val = evaluation
                         max_move = col
 
-                    alpha = alpha if alpha > eval else eval
+                    alpha = alpha if alpha > evaluation else evaluation
                     if alpha >= beta:
                         break
 
@@ -201,14 +202,14 @@ class AlphaBetaPlayer(PlayerController):
                 if board.is_valid(col):
                     child_id = 3 - player_id
                     child_board: Board = board.get_new_board(col, child_id)
-                    eval = self.new_alpha_beta(child_board, child_id, depth - 1, alpha, beta)
+                    evaluation = self.new_alpha_beta(child_board, child_id, depth - 1, alpha, beta)
 
-                    if eval < min_val:
-                        min_val = eval
+                    if evaluation < min_val:
+                        min_val = evaluation
                         min_move = col
 
-                    beta = beta if beta < eval else eval
-                    if alpha >= beta:
+                    beta = beta if beta < evaluation else evaluation
+                    if alpha > beta:
                         break
 
             return min_move if depth == self.depth else min_val

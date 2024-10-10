@@ -234,6 +234,10 @@ class CustomHeuristic(Heuristic):
             return 0
 
         # Check vertical win
+        for r in range(row):
+            for c in range(col):
+                evaluate_sequence(state[r, c])
+
         # Check Horizontal win
         # Check Positive Diagonal Win
         # Check Negative Diagonal Win
