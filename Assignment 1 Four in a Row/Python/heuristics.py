@@ -211,9 +211,9 @@ class CustomHeuristic(Heuristic):
         col: int
         row, col = state.shape
 
-        if winner == player_id: return max(width, height)
+        if winner == player_id: return max(row, col)
         elif winner < 0: return 0.
-        elif winner > 0: return -max(width, height)
+        elif winner > 0: return -max(row, col)
 
         value = state[row, col]
 
