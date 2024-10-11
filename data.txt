@@ -1,0 +1,46 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+
+\begin{document}
+
+\begin{table}
+\centering
+\caption{Connect Four AI Trials Summary - Grouped by Experiment}
+\begin{tabular}{ccccccccrr}
+\toprule
+Exp & Trial & Player X & Player O & game\_n & width & height & depth & X Nodes & O Nodes \\
+\midrule
+\multirow{3}{*}{1} & 1 & Human & MiniMax & 4 & 7 & 6 & 5 & 0 & 131,190 \\
+& 2 & Human & AlphaBeta & 4 & 7 & 6 & 5 & 0 & 6,801 \\
+& 3 & MiniMax & AlphaBeta & 4 & 7 & 6 & 5 & 99,101 & 5,956 \\
+\midrule
+\multirow{3}{*}{2} & 4 & Human & MiniMax & 3 & 7 & 6 & 5 & 0 & 32,887 \\
+& 5 & Human & AlphaBeta & 3 & 7 & 6 & 5 & 0 & 3,775 \\
+& 6 & MiniMax & AlphaBeta & 3 & 7 & 6 & 5 & 71,459 & 4,574 \\
+\midrule
+\multirow{3}{*}{3} & 7 & Human & MiniMax & 4 & 7 & 6 & 3 & 0 & 2,323 \\
+& 8 & Human & AlphaBeta & 4 & 7 & 6 & 3 & 0 & 1,003 \\
+& 9 & MiniMax & AlphaBeta & 4 & 7 & 6 & 3 & 2,508 & 811 \\
+\midrule
+\multirow{3}{*}{4} & 10 & Human & MiniMax & 4 & 7 & 6 & 8 & 0 & 29,753,918 \\
+& 11 & Human & AlphaBeta & 4 & 7 & 6 & 8 & 0 & 198,657 \\
+& 12 & MiniMax & AlphaBeta & 4 & 7 & 6 & 8 & 29,311,240 & 289,826 \\
+\midrule
+\multirow{3}{*}{5} & 13 & Human & MiniMax & 4 & 6 & 7 & 5 & 0 & 14,059 \\
+& 14 & Human & AlphaBeta & 4 & 6 & 7 & 5 & 0 & 2,699 \\
+& 15 & MiniMax & AlphaBeta & 4 & 6 & 7 & 5 & 10,858 & 1,720 \\
+\midrule
+\multirow{3}{*}{6} & 16 & Human & MiniMax & 4 & 12 & 14 & 5 & 0 & 2,244,585 \\
+& 17 & Human & AlphaBeta & 4 & 12 & 14 & 5 & 0 & 50,292 \\
+& 18 & MiniMax & AlphaBeta & 4 & 12 & 14 & 5 & 3,543,522 & 52,801 \\
+\midrule
+\multirow{3}{*}{7} & 19 & Human & MiniMax & 3 & 3 & 4 & 5 & 0 & 467 \\
+& 20 & Human & AlphaBeta & 3 & 3 & 4 & 5 & 0 & 216 \\
+& 21 & MiniMax & AlphaBeta & 3 & 3 & 4 & 5 & 825 & 303 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
