@@ -1,0 +1,186 @@
+Trial 1 X: Human VS O: MiniMax:
+Test Baseline: game_n = 4, width = 7, height = 6, depth = 5
+Player X evaluated a boardstate 194 times!
+Player X visited a total of 0 nodes!
+Player X played 429 moves
+Player O evaluated a boardstate 110772 times!
+Player O visited a total of 131190 nodes!
+Player O played 429 moves
+
+Trial 2 X: Human vs O: AlphaBeta:
+Test Baseline: game_n = 4, width = 7, height = 6, depth = 5
+Player X evaluated a boardstate 106 times!
+Player X visited a total of 0 nodes!
+Player X played 15 moves
+Player O evaluated a boardstate 5177 times!
+Player O visited a total of 6801 nodes!
+Player O played 15 moves
+
+Trial 3: X: MiniMax Vs O: AlphaBeta
+Test Baseline: game_n = 4, width = 7, height = 6, depth = 5
+Player X evaluated a boardstate 83448 times!
+Player X visited a total of 99101 nodes!
+Player X played 19 moves
+Player O evaluated a boardstate 4351 times!
+Player O visited a total of 5956 nodes!
+Player O played 19 moves
+
+Trial 4: X: Human vs O: MiniMax
+Test: game_n = 3, width = 7, height = 6, depth = 5
+Player X evaluated a boardstate 42 times!
+Player X visited a total of 0 nodes!
+Player X played 5 moves
+Player O evaluated a boardstate 28189 times!
+Player O visited a total of 32887 nodes!
+Player O played 5 moves
+
+Trial 5: X: Human vs O: AlphaBeta:
+Test: game_n = 3, width = 7, height = 6, depth = 5
+Player X evaluated a boardstate 42 times!
+Player X visited a total of 0 nodes!
+Player X played 5 moves
+Player O evaluated a boardstate 3052 times!
+Player O visited a total of 3775 nodes!
+Player O played 5 moves
+
+Trial 6: X: MiniMax vs O: AlphaBeta:
+Test: game_n = 3, width = 7, height = 6, depth = 5
+Player X evaluated a boardstate 61199 times!
+Player X visited a total of 71459 nodes!
+Player X played 7 moves
+Player O evaluated a boardstate 3654 times!
+Player O visited a total of 4574 nodes!
+Player O played 7 moves
+
+Trial 7: X: Human VS O: MiniMax:
+Test Baseline: game_n = 4, width = 7, height = 6, depth = 3
+Player X evaluated a boardstate 98 times!
+Player X visited a total of 0 nodes!
+Player X played 13 moves
+Player O evaluated a boardstate 1990 times!
+Player O visited a total of 2323 nodes!
+Player O played 13 moves
+
+Trial 8: X: Human VS O: AlphaBeta:
+Test Baseline: game_n = 4, width = 7, height = 6, depth = 3
+Player X evaluated a boardstate 142 times!
+Player X visited a total of 0 nodes!
+Player X played 23 moves
+Player O evaluated a boardstate 780 times!
+Player O visited a total of 1003 nodes!
+Player O played 23 moves
+
+Trial 9: X: MiniMax VS O: AlphaBeta:
+Test Baseline: game_n = 4, width = 7, height = 6, depth = 3
+Player X evaluated a boardstate 2106 times!
+Player X visited a total of 2508 nodes!
+Player X played 20 moves
+Player O evaluated a boardstate 615 times!
+Player O visited a total of 811 nodes!
+Player O played 20 moves
+
+Trial 10: X: Human VS O: MiniMax:
+Test: game_n = 4, width = 7, height = 6, depth 8
+Player X evaluated a boardstate 136 times!
+Player X visited a total of 0 nodes!
+Player X played 22 moves
+Player O evaluated a boardstate 25288910 times!
+Player O visited a total of 29753918 nodes!
+Player O played 22 moves
+
+Trial 11: X: Human VS O: AlphaBeta:
+Test: game_n = 4, width = 7, height = 6, depth 8
+Player X evaluated a boardstate 158 times!
+Player X visited a total of 0 nodes!
+Player X played 25 moves
+Player O evaluated a boardstate 99698 times!
+Player O visited a total of 198657 nodes!
+Player O played 25 moves
+
+Trial 12: X: MiniMax VS O: AlphaBeta:
+Test: game_n = 4, width = 7, height = 6, depth 8
+Player X evaluated a boardstate 24876977 times!
+Player X visited a total of 29311240 nodes!
+Player X played 22 moves
+Player O evaluated a boardstate 145608 times!
+Player O visited a total of 289826 nodes!
+Player O played 22 moves
+
+Trial 13: X: Human VS O: MiniMax:
+Test: game_n = 4, width = 6, height = 7, depth 5
+Player X evaluated a boardstate 168 times!
+Player X visited a total of 0 nodes!
+Player X played 34 moves
+Player O evaluated a boardstate 11479 times!
+Player O visited a total of 14059 nodes!
+Player O played 34 moves
+
+Trial 14: X: Human VS O: AlphaBeta:
+Test: game_n = 4, width = 6, height = 7, depth 5
+Player X evaluated a boardstate 156 times!
+Player X visited a total of 0 nodes!
+Player X played 28 moves
+Player O evaluated a boardstate 1445 times!
+Player O visited a total of 2699 nodes!
+Player O played 28 moves
+
+Trial 15: X: MiniMax VS O: AlphaBeta:
+Test: game_n = 4, width = 6, height = 7, depth 5
+Player X evaluated a boardstate 8877 times!
+Player X visited a total of 10858 nodes!
+Player X played 21 moves
+Player O evaluated a boardstate 912 times!
+
+Trial 16: X: Human VS O: MiniMax:
+Test: game_n = 4, width = 12, height = 14, depth 5
+Player X evaluated a boardstate 240 times!
+Player X visited a total of 0 nodes!
+Player X played 19 moves
+Player O evaluated a boardstate 2057537 times!
+Player O visited a total of 2244585 nodes!
+Player O played 19 moves
+
+Trial 17: X: Human VS O: AlphaBeta
+Test: game_n = 4, width = 12, height = 14, depth 5
+Player X evaluated a boardstate 288 times!
+Player X visited a total of 0 nodes!
+Player X played 23 moves
+Player O evaluated a boardstate 42476 times!
+Player O visited a total of 50292 nodes!
+Player O played 23 moves
+
+Trial 18: X: MiniMax VS O: AlphaBeta
+Test: game_n = 4, width = 12, height = 14, depth 5
+Player X evaluated a boardstate 3231854 times!
+Player X visited a total of 3543522 nodes!
+Player X played 35 moves
+Player O evaluated a boardstate 43364 times!
+Player O visited a total of 52801 nodes!
+Player O played 35 moves
+
+Trial 19: X: Human VS O: MiniMax:
+Test: game_n = 3, width = 3, height = 4, depth 5
+Player X evaluated a boardstate 30 times!
+Player X visited a total of 0 nodes!
+Player X played 12 moves
+Player O evaluated a boardstate 287 times!
+Player O visited a total of 467 nodes!
+Player O played 12 moves
+
+Trial 20: X: Human VS O: AlphaBeta:
+Test: game_n = 3, width = 3, height = 4, depth 5
+Player X evaluated a boardstate 28 times!
+Player X visited a total of 0 nodes!
+Player X played 11 moves
+Player O evaluated a boardstate 123 times!
+Player O visited a total of 216 nodes!
+Player O played 11 moves
+
+Trial 21: X: MiniMax VS O: AlphaBeta:
+Test: game_n = 3, width = 3, height = 4, depth 5
+Player X evaluated a boardstate 515 times!
+Player X visited a total of 825 nodes!
+Player X played 11 moves
+Player O evaluated a boardstate 166 times!
+Player O visited a total of 303 nodes!
+Player O played 11 moves
