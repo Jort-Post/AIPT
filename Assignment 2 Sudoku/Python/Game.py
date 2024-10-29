@@ -20,4 +20,8 @@ class Game:
         @return: true if the sudoku solution is correct
         """
         # TODO: implement valid_solution function
+
+        # Check all columns and rows of 3x3 squares
+        # Check all Columns of 9x9 square
+        # Check all Rows of 9x9 Square
         return False

@@ -58,6 +58,15 @@ class Sudoku:
         """
 
     # TODO: for each field, add its neighbors
+        # A grid is a list with 9 sublists, every sublist has 9 values, each value is an instance of Field()
+        # Enumerate() is going to be key here.
+        # I need to be able to access neighbouring fields in different sublists, but how?
+        # Use Field.set_neighbours
+
+        for index, block in enumerate(grid):
+            for col_index, field in enumerate(block):
+                if index == 1 and col_index == 1:
+
 
     def board_to_string(self):
 
