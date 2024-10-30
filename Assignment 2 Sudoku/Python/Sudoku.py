@@ -67,6 +67,8 @@ class Sudoku:
             for field_index, field in enumerate(block):
                 neighbours = []
 
+                # Left
+
                 # Check left neighbour
                 if field_index > 0:
                     left = block[field_index - 1]
@@ -77,6 +79,8 @@ class Sudoku:
                 else:
                     left = None
                 neighbours.append(left)
+
+                # Right
 
                 # Check right neighbour inside current block
                 if field_index < 3:
@@ -89,6 +93,8 @@ class Sudoku:
                     right = None
                 neighbours.append(right)
 
+                # Above
+
                 # Check field above current field
                 if field_index > 3:
                     up = block[field_index + 3]
@@ -98,6 +104,8 @@ class Sudoku:
                 else:
                     up = None
                 neighbours.append(up)
+
+                # Below
 
                 # Check field below current field
                 if field_index < 7:
