@@ -77,7 +77,7 @@ class Sudoku:
                     left = grid[block_index - 1][field_index + 2]
                 # If current field is in the first column of the grid (leftmost, has no neighbours to it's left):
                 else:
-                    left = None
+                    left = 0
                 neighbours.append(left)
 
                 # Right
@@ -90,7 +90,7 @@ class Sudoku:
                     right = grid[block_index + 1][field_index - 2]
                 # If current field is on the last column of the grid (rightmost, has no neighbours to the right:
                 else:
-                    right = None
+                    right = 0
                 neighbours.append(right)
 
                 # Above
@@ -102,7 +102,7 @@ class Sudoku:
                 elif block_index not in (1, 2, 3):  # could use block_index > 3, but this is more consistent with syntax
                     up = grid[block_index - 3][field_index + 6]
                 else:
-                    up = None
+                    up = 0
                 neighbours.append(up)
 
                 # Below
@@ -113,7 +113,7 @@ class Sudoku:
                 elif block_index not in (7, 8, 9):
                     down = grid[block_index + 3][field_index - 6]
                 else:
-                    down = None
+                    down = 0
                 neighbours.append(down)
 
                 field.set_neighbours(neighbours)
