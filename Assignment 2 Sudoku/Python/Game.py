@@ -18,25 +18,24 @@ class Game:
         # TODO: implement AC-3
 
         # CSP is a tuple of fields, field domains and all constraints between the fields
-        arcs = []
-        domains = []
-        CSP = ()
 
         # Self.board = grid
 
+
+
         # Loading Arcs
-        for block in self.sudoku.board:
-            for value in block:
-                if block[value] != value.get_neighbours():
+        queue = PriorityQueue()
 
+        for block in self.sudoku.get_board():
+            for field in block:
 
+                for neighbour in field.get_neighbours():
+                    if neighbour == None:
+                        continue
+                    queue.put((field, neighbour))
 
-        def AC3(CSP):
-            queue = PriorityQueue()
-            queue.put()
-
-            while not queue.empty():
-                current = queue.get()
+        while not queue.empty():
+            current = queue.get()
 
 
         return True
