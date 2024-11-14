@@ -135,56 +135,64 @@ class Sudoku:
                     for i in range(3):
 
                         if block_index in (6, 7, 8):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            # ADD ALL FIELDS FROM LEFT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index - 2][field_index + i])
+                            # UP 1 BLOCK
+                            neighbours.append(grid[block_index - 3][field_index + 3*i])
+                            # UP 2 BLOCKS
+                            neighbours.append(grid[block_index - 6][field_index + 3*i])
 
                         elif block_index in (3, 4, 5):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            neighbours.append(grid[block_index + 1][field_index + i])
+                            # UP 1 BLOCK
+                            neighbours.append(grid[block_index - 3][field_index + 3*i])
+                            # DOWN 1 BLOCK
+                            neighbours.append(grid[block_index + 3][field_index + 3*i])
 
                         elif block_index in (0, 1, 2):
-                            # ADD ALL FIELDS IN NEIGHBOURING RIGHT TO CURRENT FIELD IN THE SAME ROW
-                            neighbours.append(grid[block_index + 1][field_index + i])
-                            # ADD ALL FIELDS FROM RIGHT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index + 2][field_index + i])
+                            # DOWN 1 BLOCK
+                            neighbours.append(grid[block_index + 3][field_index + 3*i])
+                            # DOWN 2 BLOCKS
+                            neighbours.append(grid[block_index + 6][field_index + 3*i])
 
                 elif field_index in (3, 4, 5):
                     for i in range(-1, 2):
 
                         if block_index in (6, 7, 8):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            # ADD ALL FIELDS FROM LEFT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index - 2][field_index + i])
+                            # UP 1 BLOCK
+                            neighbours.append(grid[block_index - 3][field_index + 3 * i])
+                            # UP 2 BLOCKS
+                            neighbours.append(grid[block_index - 6][field_index + 3 * i])
 
                         elif block_index in (3, 4, 5):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            neighbours.append(grid[block_index + 1][field_index + i])
+                            # UP 1 BLOCK
+                            neighbours.append(grid[block_index - 3][field_index + 3 * i])
+                            # DOWN 1 BLOCK
+                            neighbours.append(grid[block_index + 3][field_index + 3 * i])
 
                         elif block_index in (0, 1, 2):
-                            # ADD ALL FIELDS IN NEIGHBOURING RIGHT TO CURRENT FIELD IN THE SAME ROW
-                            neighbours.append(grid[block_index + 1][field_index + i])
-                            # ADD ALL FIELDS FROM RIGHT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index + 2][field_index + i])
+                            # DOWN 1 BLOCK
+                            neighbours.append(grid[block_index + 3][field_index + 3 * i])
+                            # DOWN 2 BLOCKS
+                            neighbours.append(grid[block_index + 6][field_index + 3 * i])
 
                 elif field_index in (6, 7, 8):
                     for i in range(-2, 1):
 
                         if block_index in (6, 7, 8):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            # ADD ALL FIELDS FROM LEFT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index - 2][field_index + i])
+                            # UP 1 BLOCK
+                            neighbours.append(grid[block_index - 3][field_index + 3 * i])
+                            # UP 2 BLOCKS
+                            neighbours.append(grid[block_index - 6][field_index + 3 * i])
 
                         elif block_index in (3, 4, 5):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            neighbours.append(grid[block_index + 1][field_index + i])
+                            # UP 1 BLOCK
+                            neighbours.append(grid[block_index - 3][field_index + 3 * i])
+                            # DOWN 1 BLOCK
+                            neighbours.append(grid[block_index + 3][field_index + 3 * i])
 
                         elif block_index in (0, 1, 2):
-                            # ADD ALL FIELDS IN NEIGHBOURING RIGHT TO CURRENT FIELD IN THE SAME ROW
-                            neighbours.append(grid[block_index + 1][field_index + i])
-                            # ADD ALL FIELDS FROM RIGHT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index + 2][field_index + i])
-
+                            # DOWN 1 BLOCK
+                            neighbours.append(grid[block_index + 3][field_index + 3 * i])
+                            # DOWN 2 BLOCKS
+                            neighbours.append(grid[block_index + 6][field_index + 3 * i])
 
                 field.set_neighbours(neighbours)
 

@@ -24,15 +24,10 @@ class Game:
 
 
         # Loading Arcs
+        # Loop over game board to get the grid with fields, then loop over the neighbours of each field to set a constraint as a tuple; (field, neighbour)
         queue = PriorityQueue()
 
-        for block in self.sudoku.get_board():
-            for field in block:
 
-                for neighbour in field.get_neighbours():
-                    if neighbour == None:
-                        continue
-                    queue.put((field, neighbour))
 
         while not queue.empty():
             current = queue.get()
