@@ -13,21 +13,27 @@ class Game:
         Implementation of the AC-3 algorithm
         @return: true if the constraints can be satisfied, false otherwise
         """
-        # How to define constraints?
-        # The queue needs to be filled with all arcs3
         # TODO: implement AC-3
 
-        # CSP is a tuple of fields, field domains and all constraints between the fields
-
-        # Self.board = grid
-
-
+        def fill_queue(queue):
+            """
+            Helper function to fill the queue with all arcs
+            :param queue:
+            :return:
+            """
+            grid = self.sudoku.get_board()
+            for block in grid:
+                for field in block:
+                    neighbours = field.get_neigbours()
+                    for neighbour in neighbours:
+                        if field.is_finalized() and neighbour.is_finalized():
+                            continue
+                        else:
+                            queue.put((field, neighbour))
+            return queue
 
         # Loading Arcs
-        # Loop over game board to get the grid with fields, then loop over the neighbours of each field to set a constraint as a tuple; (field, neighbour)
-        queue = PriorityQueue()
-
-
+        queue = fill_queue(PriorityQueue())
 
         while not queue.empty():
             current = queue.get()

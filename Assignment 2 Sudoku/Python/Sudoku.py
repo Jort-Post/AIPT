@@ -63,6 +63,63 @@ class Sudoku:
         # I need to be able to access neighbouring fields in different sublists, but how?
         # Use Field.set_neighbours
 
+        def add_row_neighbours(grid, block_index, field_index, neighbours, i):
+            """
+            Helper function for adding a field from a block to the right, to the left, and 2 to the right and 2 to the left of the current field to it's neighbours
+            :param grid:
+            :param block_index:
+            :param field_index:
+            :param neighbours:
+            :param i:
+            :return:
+            """
+            if block_index in (2, 5, 8):
+                neighbours.append(grid[block_index - 1][field_index + i])
+                # ADD ALL FIELDS FROM LEFT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
+                neighbours.append(grid[block_index - 2][field_index + i])
+
+            elif block_index in (1, 4, 7):
+                neighbours.append(grid[block_index - 1][field_index + i])
+                neighbours.append(grid[block_index + 1][field_index + i])
+
+            elif block_index in (0, 3, 6):
+                # ADD ALL FIELDS IN NEIGHBOURING RIGHT TO CURRENT FIELD IN THE SAME ROW
+                neighbours.append(grid[block_index + 1][field_index + i])
+                # ADD ALL FIELDS FROM RIGHT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
+                neighbours.append(grid[block_index + 2][field_index + i])
+
+            return neighbours
+
+        def add_column_neighbours(grid, block_index, field_index, neighbours, i):
+            """
+            Helper function for adding a field from a block above and below, or 2 above and 2 below the current field to it's neighbours
+            :param grid:
+            :param block_index:
+            :param field_index:
+            :param neighbours:
+            :param i:
+            :return:
+            """
+            if block_index in (6, 7, 8):
+                # UP 1 BLOCK
+                neighbours.append(grid[block_index - 3][field_index + 3 * i])
+                # UP 2 BLOCKS
+                neighbours.append(grid[block_index - 6][field_index + 3 * i])
+
+            elif block_index in (3, 4, 5):
+                # UP 1 BLOCK
+                neighbours.append(grid[block_index - 3][field_index + 3 * i])
+                # DOWN 1 BLOCK
+                neighbours.append(grid[block_index + 3][field_index + 3 * i])
+
+            elif block_index in (0, 1, 2):
+                # DOWN 1 BLOCK
+                neighbours.append(grid[block_index + 3][field_index + 3 * i])
+                # DOWN 2 BLOCKS
+                neighbours.append(grid[block_index + 6][field_index + 3 * i])
+
+            return neighbours
+
         for block_index, block in enumerate(grid):
             # Block indices range from 0 to 8. 0 is top left, 8 is bottom right.
             for field_index, field in enumerate(block):
@@ -76,123 +133,30 @@ class Sudoku:
                 # Left & Right; Row
 
                 if field_index in (0, 3, 6):
-                    for i in range(3):
-
-                        if block_index in (2, 5, 8):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            # ADD ALL FIELDS FROM LEFT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index - 2][field_index + i])
-
-                        elif block_index in (1, 4, 7):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            neighbours.append(grid[block_index + 1][field_index + i])
-
-                        elif block_index in (0, 3, 6):
-                            # ADD ALL FIELDS IN NEIGHBOURING RIGHT TO CURRENT FIELD IN THE SAME ROW
-                            neighbours.append(grid[block_index + 1][field_index + i])
-                            # ADD ALL FIELDS FROM RIGHT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index + 2][field_index + i])
+                    for offset in range(3):
+                        neighbours = add_row_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 elif field_index in (1, 4, 7):
-                    for i in range(-1, 2):
-
-                        if block_index in (2, 5, 8):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            # ADD ALL FIELDS FROM LEFT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index - 2][field_index + i])
-
-                        elif block_index in (1, 4, 7):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            neighbours.append(grid[block_index + 1][field_index + i])
-
-                        elif block_index in (0, 3, 6):
-                            # ADD ALL FIELDS IN NEIGHBOURING RIGHT TO CURRENT FIELD IN THE SAME ROW
-                            neighbours.append(grid[block_index + 1][field_index + i])
-                            # ADD ALL FIELDS FROM RIGHT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index + 2][field_index + i])
+                    for offset in range(-1, 2):
+                        neighbours = add_row_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 elif field_index in (2, 5, 8):
-                    for i in range(-2, 1):
-
-                        if block_index in (2, 5, 8):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            # ADD ALL FIELDS FROM LEFT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index - 2][field_index + i])
-
-                        elif block_index in (1, 4, 7):
-                            neighbours.append(grid[block_index - 1][field_index + i])
-                            neighbours.append(grid[block_index + 1][field_index + i])
-
-                        elif block_index in (0, 3, 6):
-                            # ADD ALL FIELDS IN NEIGHBOURING RIGHT TO CURRENT FIELD IN THE SAME ROW
-                            neighbours.append(grid[block_index + 1][field_index + i])
-                            # ADD ALL FIELDS FROM RIGHT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                            neighbours.append(grid[block_index + 2][field_index + i])
+                    for offset in range(-2, 1):
+                        neighbours = add_row_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 # Above & Below; Column
 
                 if field_index in (0, 1, 2):
-                    for i in range(3):
-
-                        if block_index in (6, 7, 8):
-                            # UP 1 BLOCK
-                            neighbours.append(grid[block_index - 3][field_index + 3*i])
-                            # UP 2 BLOCKS
-                            neighbours.append(grid[block_index - 6][field_index + 3*i])
-
-                        elif block_index in (3, 4, 5):
-                            # UP 1 BLOCK
-                            neighbours.append(grid[block_index - 3][field_index + 3*i])
-                            # DOWN 1 BLOCK
-                            neighbours.append(grid[block_index + 3][field_index + 3*i])
-
-                        elif block_index in (0, 1, 2):
-                            # DOWN 1 BLOCK
-                            neighbours.append(grid[block_index + 3][field_index + 3*i])
-                            # DOWN 2 BLOCKS
-                            neighbours.append(grid[block_index + 6][field_index + 3*i])
+                    for offset in range(3):
+                        neighbours = add_column_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 elif field_index in (3, 4, 5):
-                    for i in range(-1, 2):
-
-                        if block_index in (6, 7, 8):
-                            # UP 1 BLOCK
-                            neighbours.append(grid[block_index - 3][field_index + 3 * i])
-                            # UP 2 BLOCKS
-                            neighbours.append(grid[block_index - 6][field_index + 3 * i])
-
-                        elif block_index in (3, 4, 5):
-                            # UP 1 BLOCK
-                            neighbours.append(grid[block_index - 3][field_index + 3 * i])
-                            # DOWN 1 BLOCK
-                            neighbours.append(grid[block_index + 3][field_index + 3 * i])
-
-                        elif block_index in (0, 1, 2):
-                            # DOWN 1 BLOCK
-                            neighbours.append(grid[block_index + 3][field_index + 3 * i])
-                            # DOWN 2 BLOCKS
-                            neighbours.append(grid[block_index + 6][field_index + 3 * i])
+                    for offset in range(-1, 2):
+                        neighbours = add_column_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 elif field_index in (6, 7, 8):
-                    for i in range(-2, 1):
-
-                        if block_index in (6, 7, 8):
-                            # UP 1 BLOCK
-                            neighbours.append(grid[block_index - 3][field_index + 3 * i])
-                            # UP 2 BLOCKS
-                            neighbours.append(grid[block_index - 6][field_index + 3 * i])
-
-                        elif block_index in (3, 4, 5):
-                            # UP 1 BLOCK
-                            neighbours.append(grid[block_index - 3][field_index + 3 * i])
-                            # DOWN 1 BLOCK
-                            neighbours.append(grid[block_index + 3][field_index + 3 * i])
-
-                        elif block_index in (0, 1, 2):
-                            # DOWN 1 BLOCK
-                            neighbours.append(grid[block_index + 3][field_index + 3 * i])
-                            # DOWN 2 BLOCKS
-                            neighbours.append(grid[block_index + 6][field_index + 3 * i])
+                    for offset in range(-2, 1):
+                        neighbours = add_column_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 field.set_neighbours(neighbours)
 
