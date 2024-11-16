@@ -43,12 +43,15 @@ class Game:
         while not queue.empty():
             field1, field2 = queue.get()
 
+            revise(field1, field2)
+
             if field1.get_domain_size() == 0:
                 return False
 
-
-
-
+            if revise(field1, field2):
+                for neighbour in field1.get_other_neighbours(field2):
+                    if (neighbour, field1) not in queue:
+                        queue.put((neighbour, field1))
 
         return True
 
@@ -62,4 +65,12 @@ class Game:
         # Check all columns and rows of 3x3 squares
         # Check all Columns of 9x9 square
         # Check all Rows of 9x9 Square
-        return False
+
+        for block in self.sudoku.get_board():
+            for field in block:
+                for neighbour in field.get_neigbours():
+                    if field.get_value() == neighbour.get_value():
+                        return False
+                    else:
+                        continue
+        return True
