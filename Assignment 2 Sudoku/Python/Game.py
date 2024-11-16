@@ -32,11 +32,22 @@ class Game:
                             queue.put((field, neighbour))
             return queue
 
+        def revise(field1, field2):
+
+
+
+
         # Loading Arcs
         queue = fill_queue(PriorityQueue())
 
         while not queue.empty():
-            current = queue.get()
+            field1, field2 = queue.get()
+
+            if field1.get_domain_size() == 0:
+                return False
+
+
+
 
 
         return True
