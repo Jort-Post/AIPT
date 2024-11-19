@@ -51,7 +51,7 @@ class Field:
         @param b:
         @return: All neighbors of this Field except b
         """
-        new_neighbours = self.neighbours
+        new_neighbours = self.neighbours.copy()
         new_neighbours.remove(b)
         return new_neighbours
 
