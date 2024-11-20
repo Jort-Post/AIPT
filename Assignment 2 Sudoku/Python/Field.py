@@ -71,16 +71,12 @@ class Field:
         :param value: value to remove
         :return: true if the value was removed
         """
-        try:
-            self.domain.remove(value)
-        except:
-            return False
+        value_removed = self.domain.remove(value)
 
         if len(self.domain) == 1:
             self.set_value(self.domain[0])
 
-        return True
-        #return value_removed
+        return value_removed
 
     # endregion
 
@@ -93,4 +89,6 @@ class Field:
         """
         return "." if self.value == 0 else str(self.value)
 
+    def __lt__(self, other):
+        return self.get_domain_size() > other.get_domain_size()
     # endregion

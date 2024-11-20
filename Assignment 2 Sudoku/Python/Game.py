@@ -23,15 +23,12 @@ class Game:
             grid = self.sudoku.get_board()
             for block in grid:
                 for field in block:
-                    #if not field.is_finalized():
+                    if not field.is_finalized():
                         neighbours = field.get_neighbours()
                         for neighbour in neighbours:
-                            #priority = field.get_domain_size()
-                        # Problem: HeapQ compares second element if the first element is a tie with another value
-                        # Since all our values have the same domain size, this will always happen.
-                                priority_queue.append((field, neighbour))
-                        #. heapq.heappush(priority_queue, (priority, (field,neighbour)))
-                        #priority_queue.put((priority, (field,neighbour)))
+                            if neighbour.is_finalized():
+                                priority = field.get_domain_size()
+                                heapq.heappush(priority_queue, (priority, (field, neighbour)))
             return priority_queue
 
         def revise(field1, field2):
@@ -42,27 +39,18 @@ class Game:
             :return: modified
             """
             modified = False
+            field1_domain = field1.get_domain().copy()
 
             if field1.is_finalized():
                 return modified
 
-            elif field2.is_finalized() or field2.get_domain_size() < 2:
-                field2_value = field2.get_value()
-                modified = field1.remove_from_domain(field2_value)
-
             else:
-                field1_domain = field1.get_domain().copy()
+                # HERE IS THE PROBLEM!!!!!:
                 field2_domain = field2.get_domain().copy()
-
                 for x_m in field1_domain:
-                    constraints_violated = 0
-
-                    for x_n in field2_domain:
-                        if x_m == x_n:
-                            constraints_violated += 1
-
-                    if constraints_violated == field2.get_domain_size():
-                        modified = field1.remove_from_domain(x_m)
+                    if all(x_m == x_n for x_n in field2_domain):
+                        field1.remove_from_domain(x_m)
+                        modified = True
 
             return modified
 
@@ -72,21 +60,16 @@ class Game:
         queue = fill_queue(empty_queue)
 
         while queue:
-            #_, (field1, field2) = heapq.heappop(queue)
-            (field1, field2) = queue.pop(0)
-
+            _, (field1, field2) = heapq.heappop(queue)
 
             if revise(field1, field2):
                 if field1.get_domain_size() == 0:
                     return False
 
                 for neighbour in field1.get_other_neighbours(field2):
-                    if neighbour != field1:
-                    #if (neighbour, field1) not in queue:
-                        #priority = neighbour.get_domain_size()
-                        #heapq.heappush(queue, (priority,(neighbour,field1)))
-                        #queue.put((priority, (neighbour, field1)))
-                        queue.append((neighbour, field1))
+                    if (neighbour, field1) not in queue:
+                        priority = neighbour.get_domain_size()
+                        heapq.heappush(queue, (priority,(neighbour, field1)))
         return True
 
     def valid_solution(self) -> bool:
@@ -96,6 +79,8 @@ class Game:
         """
         # TODO: implement valid_solution function
         print(self.sudoku)
+        grid = self.sudoku.get_board()
+
         for block in self.sudoku.get_board():
             for field in block:
                 if not field.is_finalized():

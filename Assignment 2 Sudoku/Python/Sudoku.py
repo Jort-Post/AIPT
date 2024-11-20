@@ -127,7 +127,7 @@ class Sudoku:
                 neighbours = []
 
                 for neighbour in block:
-                    if neighbour != block[field_index]:
+                    if neighbour != grid[block_index][field_index]:
                         neighbours.append(neighbour)
 
                 # Left & Right; Row
