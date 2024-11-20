@@ -71,10 +71,16 @@ class Field:
         :param value: value to remove
         :return: true if the value was removed
         """
-        value_removed = self.domain.remove(value)
+        try:
+            self.domain.remove(value)
+        except:
+            return False
+
         if len(self.domain) == 1:
             self.set_value(self.domain[0])
-        return value_removed
+
+        return True
+        #return value_removed
 
     # endregion
 

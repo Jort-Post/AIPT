@@ -127,36 +127,36 @@ class Sudoku:
                 neighbours = []
 
                 for neighbour in block:
-                    if neighbour != field:
+                    if neighbour != block[field_index]:
                         neighbours.append(neighbour)
 
                 # Left & Right; Row
 
                 if field_index in (0, 3, 6):
                     for offset in range(3):
-                        neighbours = add_row_neighbours(grid, block_index, field_index, neighbours, offset)
+                        neighbours += add_row_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 elif field_index in (1, 4, 7):
                     for offset in range(-1, 2):
-                        neighbours = add_row_neighbours(grid, block_index, field_index, neighbours, offset)
+                        neighbours += add_row_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 elif field_index in (2, 5, 8):
                     for offset in range(-2, 1):
-                        neighbours = add_row_neighbours(grid, block_index, field_index, neighbours, offset)
+                        neighbours += add_row_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 # Above & Below; Column
 
                 if field_index in (0, 1, 2):
                     for offset in range(3):
-                        neighbours = add_column_neighbours(grid, block_index, field_index, neighbours, offset)
+                        neighbours += add_column_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 elif field_index in (3, 4, 5):
                     for offset in range(-1, 2):
-                        neighbours = add_column_neighbours(grid, block_index, field_index, neighbours, offset)
+                        neighbours += add_column_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 elif field_index in (6, 7, 8):
                     for offset in range(-2, 1):
-                        neighbours = add_column_neighbours(grid, block_index, field_index, neighbours, offset)
+                        neighbours += add_column_neighbours(grid, block_index, field_index, neighbours, offset)
 
                 field.set_neighbours(neighbours)
 
