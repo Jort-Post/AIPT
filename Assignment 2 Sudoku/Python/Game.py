@@ -20,11 +20,10 @@ class Game:
             :param queue:
             :return:
             """
-            seen_arcs = set()
             grid = self.sudoku.get_board()
             for block in grid:
                 for field in block:
-                    if not field.is_finalized():
+                    #if not field.is_finalized():
                         neighbours = field.get_neighbours()
                         for neighbour in neighbours:
                             #priority = field.get_domain_size()
@@ -47,7 +46,7 @@ class Game:
             if field1.is_finalized():
                 return modified
 
-            elif field2.is_finalized():
+            elif field2.is_finalized() or field2.get_domain_size() < 2:
                 field2_value = field2.get_value()
                 modified = field1.remove_from_domain(field2_value)
 
@@ -67,6 +66,7 @@ class Game:
 
             return modified
 
+
         # Loading Arcs
         empty_queue = []
         queue = fill_queue(empty_queue)
@@ -81,8 +81,8 @@ class Game:
                     return False
 
                 for neighbour in field1.get_other_neighbours(field2):
-                    #if neighbour != field1:
-                    if (neighbour, field1) not in queue:
+                    if neighbour != field1:
+                    #if (neighbour, field1) not in queue:
                         #priority = neighbour.get_domain_size()
                         #heapq.heappush(queue, (priority,(neighbour,field1)))
                         #queue.put((priority, (neighbour, field1)))
