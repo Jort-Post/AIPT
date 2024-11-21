@@ -3,7 +3,7 @@ class Field:
 
     def __init__(self, *args):
 
-        self.value = 0
+        self.value = 0®
         self.domain = []
         # A list of all the fields that this field is constrained by
         self.neighbours = []
@@ -71,12 +71,10 @@ class Field:
         :param value: value to remove
         :return: true if the value was removed
         """
-        value_removed = self.domain.remove(value)
+        self.domain.remove(value)
 
         if len(self.domain) == 1:
             self.set_value(self.domain[0])
-
-        return value_removed
 
     # endregion
 
@@ -89,6 +87,4 @@ class Field:
         """
         return "." if self.value == 0 else str(self.value)
 
-    def __lt__(self, other):
-        return self.get_domain_size() > other.get_domain_size()
     # endregion
