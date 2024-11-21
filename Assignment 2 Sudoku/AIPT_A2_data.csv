@@ -1,0 +1,201 @@
+﻿sudoku_id;trial;heuristic;arc_revisions;solved
+1;1;Default;5055;Yes
+1;2;Default;5062;Yes
+1;3;Default;4932;Yes
+1;4;Default;5062;Yes
+1;5;Default;5123;Yes
+1;6;Default;5540;Yes
+1;7;Default;5062;Yes
+1;8;Default;5197;Yes
+1;9;Default;5129;Yes
+1;10;Default;5326;Yes
+1;1;Minimum Remaining Value;6415;Yes
+1;2;Minimum Remaining Value;6451;Yes
+1;3;Minimum Remaining Value;6423;Yes
+1;4;Minimum Remaining Value;6423;Yes
+1;5;Minimum Remaining Value;6342;Yes
+1;6;Minimum Remaining Value;6319;Yes
+1;7;Minimum Remaining Value;6157;Yes
+1;8;Minimum Remaining Value;6995;Yes
+1;9;Minimum Remaining Value;6668;Yes
+1;10;Minimum Remaining Value;5901;Yes
+1;1;Degree;6242;Yes
+1;2;Degree;6245;Yes
+1;3;Degree;6245;Yes
+1;4;Degree;6313;Yes
+1;5;Degree;6522;Yes
+1;6;Degree;6470;Yes
+1;7;Degree;6293;Yes
+1;8;Degree;6279;Yes
+1;9;Degree;6291;Yes
+1;10;Degree;6309;Yes
+1;1;Minimal Constraining Neighbour;6259;Yes
+1;2;Minimal Constraining Neighbour;6262;Yes
+1;3;Minimal Constraining Neighbour;6593;Yes
+1;4;Minimal Constraining Neighbour;6586;Yes
+1;5;Minimal Constraining Neighbour;6282;Yes
+1;6;Minimal Constraining Neighbour;6451;Yes
+1;7;Minimal Constraining Neighbour;6262;Yes
+1;8;Minimal Constraining Neighbour;6262;Yes
+1;9;Minimal Constraining Neighbour;6464;Yes
+1;10;Minimal Constraining Neighbour;6259;Yes
+2;1;Default;5287;Yes
+2;2;Default;5413;Yes
+2;3;Default;5513;Yes
+2;4;Default;5862;Yes
+2;5;Default;5413;Yes
+2;6;Default;5608;Yes
+2;7;Default;5115;Yes
+2;8;Default;5413;Yes
+2;9;Default;5452;Yes
+2;10;Default;5721;Yes
+2;1;Minimum Remaining Value;6343;Yes
+2;2;Minimum Remaining Value;6621;Yes
+2;3;Minimum Remaining Value;7059;Yes
+2;4;Minimum Remaining Value;6343;Yes
+2;5;Minimum Remaining Value;6672;Yes
+2;6;Minimum Remaining Value;6339;Yes
+2;7;Minimum Remaining Value;6610;Yes
+2;8;Minimum Remaining Value;6718;Yes
+2;9;Minimum Remaining Value;6552;Yes
+2;10;Minimum Remaining Value;6659;Yes
+2;1;Degree;6444;Yes
+2;2;Degree;6571;Yes
+2;3;Degree;6569;Yes
+2;4;Degree;6569;Yes
+2;5;Degree;6692;Yes
+2;6;Degree;6586;Yes
+2;7;Degree;6553;Yes
+2;8;Degree;6662;Yes
+2;9;Degree;6518;Yes
+2;10;Degree;6624;Yes
+2;1;Minimal Constraining Neighbour;6558;Yes
+2;2;Minimal Constraining Neighbour;6558;Yes
+2;3;Minimal Constraining Neighbour;6534;Yes
+2;4;Minimal Constraining Neighbour;6558;Yes
+2;5;Minimal Constraining Neighbour;6558;Yes
+2;6;Minimal Constraining Neighbour;6470;Yes
+2;7;Minimal Constraining Neighbour;6552;Yes
+2;8;Minimal Constraining Neighbour;6558;Yes
+2;9;Minimal Constraining Neighbour;6595;Yes
+2;10;Minimal Constraining Neighbour;6675;Yes
+3;1;Default;4736;No
+3;2;Default;4669;No
+3;3;Default;4808;No
+3;4;Default;4736;No
+3;5;Default;4760;No
+3;6;Default;4832;No
+3;7;Default;4736;No
+3;8;Default;4844;No
+3;9;Default;4792;No
+3;10;Default;4736;No
+3;1;Minimum Remaining Value;5755;No
+3;2;Minimum Remaining Value;5869;No
+3;3;Minimum Remaining Value;5805;No
+3;4;Minimum Remaining Value;5755;No
+3;5;Minimum Remaining Value;5867;No
+3;6;Minimum Remaining Value;5852;No
+3;7;Minimum Remaining Value;5755;No
+3;8;Minimum Remaining Value;5787;No
+3;9;Minimum Remaining Value;5825;No
+3;10;Minimum Remaining Value;5755;No
+3;1;Degree;5745;No
+3;2;Degree;5799;No
+3;3;Degree;5903;No
+3;4;Degree;5754;No
+3;5;Degree;5815;No
+3;6;Degree;5827;No
+3;7;Degree;5754;No
+3;8;Degree;5899;No
+3;9;Degree;5754;No
+3;10;Degree;5806;No
+3;1;Minimal Constraining Neighbour;5691;No
+3;2;Minimal Constraining Neighbour;5850;No
+3;3;Minimal Constraining Neighbour;5886;No
+3;4;Minimal Constraining Neighbour;5752;No
+3;5;Minimal Constraining Neighbour;5959;No
+3;6;Minimal Constraining Neighbour;5739;No
+3;7;Minimal Constraining Neighbour;5752;No
+3;8;Minimal Constraining Neighbour;5793;No
+3;9;Minimal Constraining Neighbour;5783;No
+3;10;Minimal Constraining Neighbour;5752;No
+4;1;Default;3564;No
+4;2;Default;3702;No
+4;3;Default;3633;No
+4;4;Default;3637;No
+4;5;Default;3605;No
+4;6;Default;3624;No
+4;7;Default;3633;No
+4;8;Default;3633;No
+4;9;Default;3633;No
+4;10;Default;3639;No
+4;1;Minimum Remaining Value ;4540;No
+4;2;Minimum Remaining Value ;4575;No
+4;3;Minimum Remaining Value ;4536;No
+4;4;Minimum Remaining Value ;4577;No
+4;5;Minimum Remaining Value ;4571;No
+4;6;Minimum Remaining Value ;4581;No
+4;7;Minimum Remaining Value ;4545;No
+4;8;Minimum Remaining Value ;4534;No
+4;9;Minimum Remaining Value ;4559;No
+4;10;Minimum Remaining Value ;4542;No
+4;1;Degree;4557;No
+4;2;Degree;4536;No
+4;3;Degree;4570;No
+4;4;Degree;4536;No
+4;5;Degree;4545;No
+4;6;Degree;4536;No
+4;7;Degree;4536;No
+4;8;Degree;4550;No
+4;9;Degree;4529;No
+4;10;Degree;4529;No
+4;1;Minimal Constraining Neighbour;4558;No
+4;2;Minimal Constraining Neighbour;4537;No
+4;3;Minimal Constraining Neighbour;4548;No
+4;4;Minimal Constraining Neighbour;4562;No
+4;5;Minimal Constraining Neighbour;4536;No
+4;6;Minimal Constraining Neighbour;4544;No
+4;7;Minimal Constraining Neighbour;4530;No
+4;8;Minimal Constraining Neighbour;4536;No
+4;9;Minimal Constraining Neighbour;4549;No
+4;10;Minimal Constraining Neighbour;4550;No
+5;1;Default;5163;Yes
+5;2;Default;4930;Yes
+5;3;Default;5008;Yes
+5;4;Default;4884;Yes
+5;5;Default;5186;Yes
+5;6;Default;5007;Yes
+5;7;Default;5237;Yes
+5;8;Default;4750;Yes
+5;9;Default;5008;Yes
+5;10;Default;4912;Yes
+5;1;Minimum Remaining Value ;6115;Yes
+5;2;Minimum Remaining Value ;6115;Yes
+5;3;Minimum Remaining Value ;6115;Yes
+5;4;Minimum Remaining Value ;6115;Yes
+5;5;Minimum Remaining Value ;6153;Yes
+5;6;Minimum Remaining Value ;6119;Yes
+5;7;Minimum Remaining Value ;6128;Yes
+5;8;Minimum Remaining Value ;6057;Yes
+5;9;Minimum Remaining Value ;6082;Yes
+5;10;Minimum Remaining Value ;6183;Yes
+5;1;Degree;6056;Yes
+5;2;Degree;6057;Yes
+5;3;Degree;6123;Yes
+5;4;Degree;6066;Yes
+5;5;Degree;5996;Yes
+5;6;Degree;6123;Yes
+5;7;Degree;6103;Yes
+5;8;Degree;6095;Yes
+5;9;Degree;6123;Yes
+5;10;Degree;6182;Yes
+5;1;Minimal Constraining Neighbour;6050;Yes
+5;2;Minimal Constraining Neighbour;6012;Yes
+5;3;Minimal Constraining Neighbour;6043;Yes
+5;4;Minimal Constraining Neighbour;6050;Yes
+5;5;Minimal Constraining Neighbour;5897;Yes
+5;6;Minimal Constraining Neighbour;6025;Yes
+5;7;Minimal Constraining Neighbour;6050;Yes
+5;8;Minimal Constraining Neighbour;6033;Yes
+5;9;Minimal Constraining Neighbour;6243;Yes
+5;10;Minimal Constraining Neighbour;6050;Yes

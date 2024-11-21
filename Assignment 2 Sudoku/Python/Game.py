@@ -32,6 +32,7 @@ class Game:
             for row in range(9):
                 # Loop over all columns in a row
                 for col in range(9):
+
                     # Continue iff other fields have influence over the final value of the current field
                     if not grid[row][col].is_finalized():
                         # Get all constraining neighbours of the current field
@@ -41,9 +42,8 @@ class Game:
                             # Add the arc between two fields to the priority queue.
                             # The priority is based on one of the ids of the Fields since the order doesn't yet matter.
 
-                            # There are two ids to make sure the heapq will never compare
-                            # two Fields in case of a tie between priorities.
-                            heapq.heappush(priority_queue, (id(neighbour), id(grid[row][col]), (grid[row][col], neighbour)))
+                            # There are two ids to make sure the heapq will never compare two Fields in case of a tie between priorities.
+                            heapq.heappush(priority_queue, (id(grid[row][col]), id(neighbour), (grid[row][col], neighbour)))
                             # The arc is added to an unresolved_arcs set which will be used in AC3
                             arcs.add((grid[row][col], neighbour))
 
@@ -71,7 +71,6 @@ class Game:
                 if all(x_m == x_n for x_n in field2_domain):
                     # If all values violate the constraint, x_m is not a valid final value and is removed
                     field1.remove_from_domain(x_m)
-                    self.domains_changed += 1
                     # The domain of field1 has now changed, so modified flips true
                     modified = True
 
@@ -89,40 +88,48 @@ class Game:
 
             # Revise the arc between field1 and field2 and continue if the domain of field1 is modified:
             if revise(field1, field2):
-
-                # If the domain of field1 is zero, there is no legal value field1 can take,
-                # and therefore the sudoku cannot be solved
+                # If the domain of field1 is zero, there is no legal value field1 can take
                 if field1.get_domain_size() == 0:
                     return False
 
                 # All neighbours of field1 need to be updated since the domain of field1 has changed
-
-                # Loop over all neighbours of field1 except for neighbour field2:
                 for neighbour in field1.get_other_neighbours(field2):
-                    # if the arc from a neighbour of field1 to field1 is new, add it to the priority queue,
-                    # based on a heuristic / priority:
+                    # A new arc is added to the priority queue based on a heuristic / priority:
                     if (neighbour, field1) not in unresolved_arcs:
+
                         # Minimum remaining Values Heuristic:
                         heuristic = neighbour.get_domain_size()
+                        try:
+                            heapq.heappush(queue, (heuristic, id(neighbour), id(field1), (neighbour, field1)))
+                            unresolved_arcs.add((neighbour, field1))
+                        except:
+                            #Degree Heuristic:
+                            heuristic = 0
+                            for n in neighbour.get_neighbours():
+                                if not n.is_finalized():
+                                    heuristic += 1
+                            heapq.heappush(queue, (heuristic, id(neighbour), id(field1), (neighbour, field1)))
+                            unresolved_arcs.add((neighbour, field1))
 
-                        # Degree Heuristic:
+                        # Degree Heuristic Alone:
                         #heuristic = 0
                         #for n in neighbour.get_neighbours():
-                           # if not n.is_finalized():
-                            #    heuristic += 1
+                        #    if not n.is_finalized():
+                        #        heuristic += 1
+                        #heapq.heappush(queue, (heuristic, id(neighbour), id(field1), (neighbour, field1)))
+                        #unresolved_arcs.add((neighbour, field1))
 
-                        # Most arcs to constrained fields Heuristic:
+                        # Most arcs to finalized fields Heuristic:
                         #heuristic = 0
                         #for n in neighbour.get_neighbours():
-                           #if n.is_finalized():
-                               #heuristic += 1
+                        #   if n.is_finalized():
+                        #       heuristic += 1
+                        #heapq.heappush(queue, (heuristic, id(neighbour), id(field1), (neighbour, field1)))
+                        #unresolved_arcs.add((neighbour, field1))
 
-
-                        # Still include the ids of both fields just in case the heuristic happens to have a tie
-                        # with another heuristic of an item in the queue.
-                        heapq.heappush(queue, (heuristic, id(field1), id(neighbour), (neighbour, field1)))
-                        # Add the new arc to the set of unresolved arcs
-                        unresolved_arcs.add((neighbour, field1))
+                        # Default: No heuristic:
+                        #heapq.heappush(queue, (id(neighbour), id(field1), (neighbour, field1)))
+                        #unresolved_arcs.add((neighbour, field1))
 
         # If the queue is empty, all constraints are resolved and a solution is found
         return True
