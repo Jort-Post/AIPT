@@ -53,29 +53,47 @@ class Sudoku:
     @staticmethod
     def add_neighbours(grid):
         """
-        Add a list of neighbors to each field in the grid.
+        Adds a list of neighbors to each field
         @param grid: 9x9 list of Fields
         """
+
+    # TODO: for each field, add its neighbors
+        # Loop over all rows in the sudoku
         for row in range(9):
+            # Loop over all columns in a row
             for col in range(9):
+                # Create an empty set to store neighbours of one field
                 neighbours = set()
 
                 # Add neighbours in the same row
                 for neighbour_col in range(9):
+                    # Check if neighbour_col is not the same as the col of the current field
                     if neighbour_col != col:
+                        # Add this neighbouring field in the same row if true
                         neighbours.add(grid[row][neighbour_col])
 
                 # Add neighbours in the same column
                 for neighbour_row in range(9):
+                    # Check if neighbour_row is not the same as the row of the current field
                     if neighbour_row != row:
+                        # Add this neighbouring field in the same row if true
                         neighbours.add(grid[neighbour_row][col])
 
                 # Add neighbours in the same 3x3 block
-                start_row, start_col = 3 * (row // 3), 3 * (col // 3)
-                for r in range(start_row, start_row + 3):
-                    for c in range(start_col, start_col + 3):
-                        if (r, c) != (row, col):
-                            neighbours.add(grid[r][c])
+                start_row = 3 * (row // 3)  # Calculate the starting row of the 3x3 block
+                start_col = 3 * (col // 3)  # Calculate the starting column of the 3x3 block
+                end_row = start_row + 3  # Calculate the ending row + 1 of the 3x3 block
+                end_col = start_col + 3  # Calculate the ending column + 1 of the 3x3 block
+
+                # Loop through all rows in the 3x3 block
+                for neighbour_row in range(start_row, end_row):
+                    # Loop through all columns in the 3x3 block
+                    for neighbour_col in range(start_col, end_col):
+                        # Check if the coordinates of the neighbouring field is not equal
+                        # to the coordinates of the current field: grid[row][col]
+                        if (neighbour_row, neighbour_col) != (row, col):
+                            # Add the field as neighbour if it is indeed a neighbour
+                            neighbours.add(grid[neighbour_row][neighbour_col])
 
                 # Set neighbours for the current field
                 grid[row][col].set_neighbours(list(neighbours))
