@@ -47,121 +47,11 @@ class Sudoku:
         except FileNotFoundError:
             print("Error opening file: " + filename)
 
-        Sudoku.add_neighbours2(grid)
+        Sudoku.add_neighbours(grid)
         return grid
 
     @staticmethod
     def add_neighbours(grid):
-        """
-        Adds a list of neighbors to each field
-        @param grid: 9x9 list of Fields
-        """
-
-    # TODO: for each field, add its neighbors
-        # A grid is a list with 9 sublists, every sublist has 9 values, each value is an instance of Field()
-        # Enumerate() is going to be key here.
-        # I need to be able to access neighbouring fields in different sublists, but how?
-        # Use Field.set_neighbours
-
-        def add_row_neighbours(grid, block_index, field_index, neighbours, i):
-            """
-            Helper function for adding a field from a block to the right, to the left, and 2 to the right and 2 to the left of the current field to it's neighbours
-            :param grid:
-            :param block_index:
-            :param field_index:
-            :param neighbours:
-            :param i:
-            :return:
-            """
-            if block_index in (2, 5, 8):
-                neighbours.add(grid[block_index - 1][field_index + i])
-                # ADD ALL FIELDS FROM LEFT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                neighbours.add(grid[block_index - 2][field_index + i])
-
-            elif block_index in (1, 4, 7):
-                neighbours.add(grid[block_index - 1][field_index + i])
-                neighbours.add(grid[block_index + 1][field_index + i])
-
-            elif block_index in (0, 3, 6):
-                # ADD ALL FIELDS IN NEIGHBOURING RIGHT TO CURRENT FIELD IN THE SAME ROW
-                neighbours.add(grid[block_index + 1][field_index + i])
-                # ADD ALL FIELDS FROM RIGHT-NEIGHBOURING BLOCK NEXT TO NEIGHBOURING BLOCK IN THE SAME ROW
-                neighbours.add(grid[block_index + 2][field_index + i])
-
-            return neighbours
-
-        def add_column_neighbours(grid, block_index, field_index, neighbours, i):
-            """
-            Helper function for adding a field from a block above and below, or 2 above and 2 below the current field to it's neighbours
-            :param grid:
-            :param block_index:
-            :param field_index:
-            :param neighbours:
-            :param i:
-            :return:
-            """
-            if block_index in (6, 7, 8):
-                # UP 1 BLOCK
-                neighbours.add(grid[block_index - 3][field_index + 3 * i])
-                # UP 2 BLOCKS
-                neighbours.add(grid[block_index - 6][field_index + 3 * i])
-
-            elif block_index in (3, 4, 5):
-                # UP 1 BLOCK
-                neighbours.add(grid[block_index - 3][field_index + 3 * i])
-                # DOWN 1 BLOCK
-                neighbours.add(grid[block_index + 3][field_index + 3 * i])
-
-            elif block_index in (0, 1, 2):
-                # DOWN 1 BLOCK
-                neighbours.add(grid[block_index + 3][field_index + 3 * i])
-                # DOWN 2 BLOCKS
-                neighbours.add(grid[block_index + 6][field_index + 3 * i])
-
-            return neighbours
-
-        for block_index, block in enumerate(grid):
-            # Block indices range from 0 to 8. 0 is top left, 8 is bottom right.
-            for field_index, field in enumerate(block):
-                # Field indices range from 0 to 8, 0 is top left, 8 is bottom right.
-                neighbours = set()
-
-                for neighbour_index in range(len(block)):
-                    if neighbour_index != field_index:
-                        neighbours.add(block[neighbour_index])
-
-                # Left & Right; Row
-
-                if field_index in (0, 3, 6):
-                    for offset in range(3):
-                        neighbours.update(add_row_neighbours(grid, block_index, field_index, neighbours, offset))
-
-                elif field_index in (1, 4, 7):
-                    for offset in range(-1, 2):
-                        neighbours.update(add_row_neighbours(grid, block_index, field_index, neighbours, offset))
-
-                elif field_index in (2, 5, 8):
-                    for offset in range(-2, 1):
-                        neighbours.update(add_row_neighbours(grid, block_index, field_index, neighbours, offset))
-
-                # Above & Below; Column
-
-                if field_index in (0, 1, 2):
-                    for offset in range(3):
-                        neighbours.update(add_column_neighbours(grid, block_index, field_index, neighbours, offset))
-
-                elif field_index in (3, 4, 5):
-                    for offset in range(-1, 2):
-                        neighbours.update(add_column_neighbours(grid, block_index, field_index, neighbours, offset))
-
-                elif field_index in (6, 7, 8):
-                    for offset in range(-2, 1):
-                        neighbours.update(add_column_neighbours(grid, block_index, field_index, neighbours, offset))
-
-                field.set_neighbours(list(neighbours))
-
-    @staticmethod
-    def add_neighbours2(grid):
         """
         Add a list of neighbors to each field in the grid.
         @param grid: 9x9 list of Fields
@@ -171,14 +61,14 @@ class Sudoku:
                 neighbours = set()
 
                 # Add neighbours in the same row
-                for c in range(9):
-                    if c != col:
-                        neighbours.add(grid[row][c])
+                for neighbour_col in range(9):
+                    if neighbour_col != col:
+                        neighbours.add(grid[row][neighbour_col])
 
                 # Add neighbours in the same column
-                for r in range(9):
-                    if r != row:
-                        neighbours.add(grid[r][col])
+                for neighbour_row in range(9):
+                    if neighbour_row != row:
+                        neighbours.add(grid[neighbour_row][col])
 
                 # Add neighbours in the same 3x3 block
                 start_row, start_col = 3 * (row // 3), 3 * (col // 3)

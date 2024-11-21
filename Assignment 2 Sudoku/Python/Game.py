@@ -26,13 +26,14 @@ class Game:
 
             for row in range(9):
                 for col in range(9):
-                    neighbours = grid[row][col].get_neighbours()
-                    for neighbour in neighbours:
-                        priority = grid[row][col].get_domain_size()
-                        priority2 = id(grid[row][col])
-                        priority3 = id(neighbour)
-                        heapq.heappush(priority_queue, (priority, priority2, priority3, (grid[row][col], neighbour)))
-                        seen_arcs.add((grid[row][col], neighbour))
+                    if not grid[row][col].is_finalized():
+                        neighbours = grid[row][col].get_neighbours()
+                        for neighbour in neighbours:
+                            if (grid[row][col], neighbour) not in seen_arcs:
+                                priority2 = id(grid[row][col])
+                                priority1 = id(neighbour)
+                                heapq.heappush(priority_queue, (priority1, priority2, (grid[row][col], neighbour)))
+                                seen_arcs.add((grid[row][col], neighbour))
 
             return priority_queue, seen_arcs
         def revise(field1, field2):
@@ -44,15 +45,11 @@ class Game:
             """
             modified = False
 
-            if field1.is_finalized():
-                return modified
-
             field1_domain = field1.get_domain().copy()
             field2_domain = field2.get_domain().copy() if not field2.is_finalized() else [field2.get_value()]
 
             for x_m in field1_domain:
-                #if all(x_m == x_n for x_n in field2_domain):
-                if not any(x_m != x_n for x_n in field2_domain):
+                if all(x_m == x_n for x_n in field2_domain):
                     field1.remove_from_domain(x_m)
                     modified = True
 
@@ -63,16 +60,28 @@ class Game:
         queue, seen_arcs = fill_queue()
 
         while queue:
-            _, _, _, (field1, field2) = heapq.heappop(queue)
+            (field1,field2) = heapq.heappop(queue)[-1]
+            seen_arcs.remove((field1, field2))
 
             if revise(field1, field2):
                 if field1.get_domain_size() == 0:
                     return False
 
                 for neighbour in field1.get_other_neighbours(field2):
-                    priority = neighbour.get_domain_size()
+                    # Minimum remaining Values Heuristic:
+                    #heuristic = neighbour.get_domain_size()
+
+                    # Degree Heuristic:
+                    heuristic = 0
+                    for n in neighbour.get_neighbours():
+                        if not n.is_finalized():
+                            heuristic += 1
+
+                    # Least constraining Heuristic:
+
                     if (neighbour, field1) not in seen_arcs:
-                        heapq.heappush(queue, (priority, (neighbour, field1)))
+                        heapq.heappush(queue, (heuristic, id(neighbour), id(field1), (neighbour, field1)))
+                        seen_arcs.add((neighbour, field1))
         return True
 
     def valid_solution(self) -> bool:
@@ -84,8 +93,10 @@ class Game:
         self.show_sudoku()
         grid = self.sudoku.get_board()
 
-        for block in self.sudoku.get_board():
-            for field in block:
-                if not field.is_finalized():
+        for row in range(9):
+            for col in range(9):
+                if not grid[row][col].is_finalized():
+                    return False
+                elif any(grid[row][col] == neighbour.get_value() for neighbour in grid[row][col].get_neighbours()):
                     return False
         return True
