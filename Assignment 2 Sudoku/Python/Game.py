@@ -3,6 +3,7 @@ import heapq
 class Game:
     def __init__(self, sudoku):
         self.sudoku = sudoku
+        self.constraints_revised = 0
 
     def show_sudoku(self):
         print(self.sudoku)
@@ -56,6 +57,7 @@ class Game:
             """
             # Domain of field1 is not modified by default
             modified = False
+            self.constraints_revised += 1
 
             # Make a copy of the domain of field1 to ensure the function keeps looping over the same domain
             field1_domain = field1.get_domain().copy()
@@ -69,6 +71,7 @@ class Game:
                 if all(x_m == x_n for x_n in field2_domain):
                     # If all values violate the constraint, x_m is not a valid final value and is removed
                     field1.remove_from_domain(x_m)
+                    self.domains_changed += 1
                     # The domain of field1 has now changed, so modified flips true
                     modified = True
 
@@ -103,16 +106,21 @@ class Game:
                         heuristic = neighbour.get_domain_size()
 
                         # Degree Heuristic:
-                        # heuristic = 0
-                        # for n in neighbour.get_neighbours():
-                        # if not n.is_finalized():
-                        # heuristic += 1
+                        #heuristic = 0
+                        #for n in neighbour.get_neighbours():
+                           # if not n.is_finalized():
+                            #    heuristic += 1
 
-                        # Least constraining Heuristic:
+                        # Most arcs to constrained fields Heuristic:
+                        #heuristic = 0
+                        #for n in neighbour.get_neighbours():
+                           #if n.is_finalized():
+                               #heuristic += 1
+
 
                         # Still include the ids of both fields just in case the heuristic happens to have a tie
                         # with another heuristic of an item in the queue.
-                        heapq.heappush(queue, (heuristic, id(neighbour), id(field1), (neighbour, field1)))
+                        heapq.heappush(queue, (heuristic, id(field1), id(neighbour), (neighbour, field1)))
                         # Add the new arc to the set of unresolved arcs
                         unresolved_arcs.add((neighbour, field1))
 
@@ -129,6 +137,8 @@ class Game:
         self.show_sudoku()
         # Get the list of 9x9 fields
         grid = self.sudoku.get_board()
+
+        print(f'Number of arcs revised: {self.constraints_revised}')
 
         # Loop over all rows in the sudoku
         for row in range(9):
