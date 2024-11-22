@@ -1,4 +1,4 @@
-from queue import PriorityQueue
+# Jort Post S1114712 and Victor Janssen S1121859
 import heapq
 class Game:
     def __init__(self, sudoku):

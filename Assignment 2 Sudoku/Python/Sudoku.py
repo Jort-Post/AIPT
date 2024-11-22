@@ -1,6 +1,5 @@
+# Jort Post S1114712 and Victor Janssen S1121859
 from Field import Field
-
-
 class Sudoku:
 
     def __init__(self, filename):

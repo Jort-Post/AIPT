@@ -1,3 +1,4 @@
+# Jort Post S1114712 and Victor Janssen S1121859
 import os
 from Game import Game
 from Sudoku import Sudoku

@@ -1,3 +1,4 @@
+# Jort Post S1114712 and Victor Janssen S1121859
 class Field:
     # region constructors
 
