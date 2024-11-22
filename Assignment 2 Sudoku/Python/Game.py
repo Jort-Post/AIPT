@@ -18,8 +18,7 @@ class Game:
         def fill_queue():
             """
             Helper function to fill the queue with all arcs
-            :param queue:
-            :return:
+            :return: priority_queue, arcs
             """
             # List of 9x9 fields
             grid = self.sudoku.get_board()
@@ -50,7 +49,7 @@ class Game:
             return priority_queue, arcs
         def revise(field1, field2):
             """
-            Helper function to revise a constraint
+            Helper function to revise an arc
             :param field1:
             :param field2:
             :return: modified
